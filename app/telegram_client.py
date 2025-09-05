@@ -14,7 +14,7 @@ session_path = os.path.join(session_dir, "anon.session")
 client = TelegramClient(session_path, api_id, api_hash)
 
 async def start_client():
-    await client.start(phone_no)
+    await client.start()
     print("Telegram client started")
     return client
 async def stop_client():
