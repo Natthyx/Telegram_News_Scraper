@@ -7,7 +7,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler # type: ignore
 from app.services.news_service import refresh_news
 
 app = FastAPI(titlr = "Telegram News API")
-FETCH_INTERVAL_MIN = int(os.getenv("FETCH_INTERVAL_MIN", "30"))
+FETCH_INTERVAL_HOURS = int(os.getenv("FETCH_INTERVAL_HOURS", "6"))
 # Register routes
 app.include_router(news.router)
 
@@ -21,7 +21,7 @@ async def scheduled_fetch():
 async def startup_event():
     await start_client()
     asyncio.create_task(refresh_news())
-    scheduler.add_job(scheduled_fetch, "interval", minutes=FETCH_INTERVAL_MIN)
+    scheduler.add_job(scheduled_fetch, "interval", hours=FETCH_INTERVAL_HOURS)
     scheduler.start()
 
 @app.on_event("shutdown")
