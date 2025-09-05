@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+telethon
+python-dotenv
+motor
+langid
+apscheduler
+chromadb
